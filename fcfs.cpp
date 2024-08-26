@@ -6,27 +6,29 @@
 using namespace std;
 
 struct Process {
-    int pid;              // ID do processo
-    int burst_time;       // Tempo de burst (pico de CPU)
-    int completion_time;  // Tempo de conclusão do processo
-    int waiting_time;     // Tempo de espera do processo
-    int turnaround_time;  // Tempo de turnaround (tempo total no sistema)
+    int pid;              // ID DO PROCESSO
+    int burst_time;       // TEMPO DE BURST (PICO DE CPU)
+    int completion_time;  // TEMPO DE CONCLUSÃO DO PROCESSO
+    int waiting_time;     // TEMPO DE ESPERA DO PROCESSO
+    int turnaround_time;  // TEMPO DE TURNAROUND (TEMPO TOTAL NO SISTEMA)
 };
 
 void fcfs(vector<Process>& processes) {
-    int current_time = 0;
-    int n=processes.size();
-    int avg_time=0;
-    for (auto& process : processes) {
-        process.completion_time = current_time + process.burst_time;
-        process.turnaround_time = process.completion_time;
-        process.waiting_time = process.turnaround_time - process.burst_time;
+    int current_time = 0;  // TEMPO ATUAL NO SISTEMA
+    int n = processes.size();  // NÚMERO DE PROCESSOS
+    int avg_time = 0;  // ACUMULADOR PARA O TEMPO MÉDIO
 
-        current_time += process.burst_time;
-        avg_time+=current_time;
+    // ITERA SOBRE CADA PROCESSO
+    for (auto& process : processes) {
+        process.completion_time = current_time + process.burst_time;  // CALCULA O TEMPO DE CONCLUSÃO
+        process.turnaround_time = process.completion_time;  // CALCULA O TEMPO DE TURNAROUND
+        process.waiting_time = process.turnaround_time - process.burst_time;  // CALCULA O TEMPO DE ESPERA
+
+        current_time += process.burst_time;  // ATUALIZA O TEMPO ATUAL
+        avg_time += current_time;  // ACUMULA O TEMPO TOTAL
     }
-    avg_time=avg_time/n;
-    cout<< "Tempo de espera médio: "<< avg_time<< "\n";
+    avg_time = avg_time / n;  // CALCULA O TEMPO MÉDIO DE ESPERA
+    cout << "TEMPO DE ESPERA MÉDIO: " << avg_time << "\n";
 }
 
 int main() {
@@ -34,24 +36,25 @@ int main() {
     ifstream file("picos_cpu.dat");
 
     if (!file) {
-        cerr << "Erro ao abrir o arquivo." << endl;
+        cerr << "ERRO AO ABRIR O ARQUIVO." << endl;  // MENSAGEM DE ERRO SE O ARQUIVO NÃO FOR ABERTO
         return 1;
     }
 
     Process process;
-    int arrival_time = 0; 
 
+    // LEITURA DOS DADOS DOS PROCESSOS DO ARQUIVO
     while (file >> process.pid >> process.burst_time) {
-        processes.push_back(process);
+        processes.push_back(process);  // ADICIONA CADA PROCESSO AO VETOR
     }
 
     file.close();
 
-    // Não há necessidade de ordenar os processos, já que eles são executados na ordem que chegam (FIFO).
+    // NÃO HÁ NECESSIDADE DE ORDENAR OS PROCESSOS, JÁ QUE ELES SÃO EXECUTADOS NA ORDEM QUE CHEGAM (FIFO).
 
-    fcfs(processes);
+    fcfs(processes);  // CHAMA A FUNÇÃO PARA EXECUTAR O ALGORITMO FCFS
 
-    cout << "PID\ tBurst\ tWaiting\n";
+    cout << "PID\tBurst\tWaiting\n";
+    // EXIBE OS RESULTADOS DETALHADOS
     for (const auto& process : processes) {
         cout << process.pid << "\t" 
              << process.burst_time << "\t"               

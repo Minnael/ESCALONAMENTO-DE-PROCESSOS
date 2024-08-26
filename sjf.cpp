@@ -7,12 +7,12 @@
 using namespace std;
 
 struct Process {
-    int pid;              // ID do processo
-    int burst_time;       // Tempo de burst (pico de CPU)
-    int completion_time;  // Tempo de conclusão do processo
-    int waiting_time;     // Tempo de espera do processo
-    int turnaround_time;  // Tempo de turnaround (tempo total no sistema)
-    bool completed;       // Indica se o processo foi completado
+    int pid;              // ID DO PROCESSO
+    int burst_time;       // TEMPO DE BURST (PICO DE CPU)
+    int completion_time;  // TEMPO DE CONCLUSÃO DO PROCESSO
+    int waiting_time;     // TEMPO DE ESPERA DO PROCESSO
+    int turnaround_time;  // TEMPO DE TURNAROUND (TEMPO TOTAL NO SISTEMA)
+    bool completed;       // INDICA SE O PROCESSO FOI COMPLETADO
 };
 
 void sjf(vector<Process>& processes, vector<int>& execution_order) {
@@ -24,7 +24,7 @@ void sjf(vector<Process>& processes, vector<int>& execution_order) {
     while (completed_processes < n) {
         int min_burst_time = INT_MAX;
         int index = -1;
-        // Encontrar o próximo processo com o menor burst time e que ainda não foi completado
+        // ENCONTRAR O PRÓXIMO PROCESSO COM O MENOR BURST TIME E QUE AINDA NÃO FOI COMPLETADO
         for (int i = 0; i < n; i++) {
             if (!processes[i].completed && processes[i].burst_time < min_burst_time) {
                 min_burst_time = processes[i].burst_time;
@@ -33,7 +33,7 @@ void sjf(vector<Process>& processes, vector<int>& execution_order) {
         }
 
         if (index != -1) {
-            // Atualizar tempos para o processo selecionado
+            // ATUALIZAR TEMPOS PARA O PROCESSO SELECIONADO
             current_time += processes[index].burst_time;
             processes[index].completion_time = current_time;
             processes[index].turnaround_time = processes[index].completion_time;
@@ -41,12 +41,12 @@ void sjf(vector<Process>& processes, vector<int>& execution_order) {
             processes[index].completed = true;
             completed_processes++;
             avg_time=avg_time+current_time;
-            // Adicionar o processo à ordem de execução
+            // ADICIONAR O PROCESSO À ORDEM DE EXECUÇÃO
             execution_order.push_back(processes[index].pid);
         }
     }
     avg_time=avg_time/n;
-    cout<< "Tempo de espera médio: "<< avg_time<< "\n";
+    cout<< "TEMPO DE ESPERA MÉDIO: "<< avg_time<< "\n";
 
 }
 
@@ -55,33 +55,33 @@ int main() {
     ifstream file("picos_cpu.dat");
 
     if (!file) {
-        cerr << "Erro ao abrir o arquivo." << endl;
+        cerr << "ERRO AO ABRIR O ARQUIVO." << endl;
         return 1;
     }
 
     Process process;
     while (file >> process.pid >> process.burst_time) {
-        process.completed = false;  // Inicialmente, nenhum processo foi completado
+        process.completed = false;  // INICIALMENTE, NENHUM PROCESSO FOI COMPLETADO
         processes.push_back(process);
     }
 
     file.close();
 
-    // Vetor para armazenar a ordem de execução dos processos
+    // VETOR PARA ARMAZENAR A ORDEM DE EXECUÇÃO DOS PROCESSOS
     vector<int> execution_order;
 
-    // Executa o escalonamento SJF
+    // EXECUTA O ESCALONAMENTO SJF
     sjf(processes, execution_order);
 
-    // Exibe a ordem de execução
-    cout << "Ordem de Execução dos Processos: ";
+    // EXIBE A ORDEM DE EXECUÇÃO
+    cout << "ORDEM DE EXECUÇÃO DOS PROCESSOS: ";
     for (int pid : execution_order) {
         cout << pid << " ";
     }
     cout << endl;
 
-    // Exibe os resultados detalhados
-    cout << "PID\tPico_ de_cpu\tWaiting\n";
+    // EXIBE OS RESULTADOS DETALHADOS
+    cout << "PID\tPICO_ DE_CPU\tWAITING\n";
     for (const auto& process : processes) {
         cout << process.pid << "\t" 
              << process.burst_time << "  \t" 
