@@ -46,7 +46,7 @@ void sjf(vector<Process>& processes, vector<int>& execution_order) {
         }
     }
     avg_time=avg_time/n;
-    cout<< "TEMPO DE ESPERA MÉDIO: "<< avg_time<< "\n";
+    cout<< "TEMPO DE ESPERA MEDIO: "<< avg_time<< "\n";
 
 }
 

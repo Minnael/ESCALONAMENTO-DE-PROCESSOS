@@ -30,5 +30,7 @@ Os algoritmos de escalonamento, desenvolvidos ao longo dos anos, têm como objet
 
 <strong>RR:</strong> Para a utilização do seguinte código é de necessidade utilizar as bibliotecas definidas abaixo:</br> - iostream </br> - fstream </br> - vector </br> - iomanip
 
+<strong>OBS: PARA TODOS OS ALGORITMOS É DADO O TEMPO DE ESPERA MÉDIO AO FINAL DA EXECUÇÃO BEM COMO TODAS AS ITERAÇÕES REALIZADAS PELO MESMO</strong>
+
 
 

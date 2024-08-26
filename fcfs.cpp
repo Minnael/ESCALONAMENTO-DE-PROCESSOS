@@ -28,7 +28,7 @@ void fcfs(vector<Process>& processes) {
         avg_time += current_time;  // ACUMULA O TEMPO TOTAL
     }
     avg_time = avg_time / n;  // CALCULA O TEMPO MÉDIO DE ESPERA
-    cout << "TEMPO DE ESPERA MÉDIO: " << avg_time << "\n";
+    cout << "TEMPO DE ESPERA MEDIO: " << avg_time << "\n";
 }
 
 int main() {

@@ -67,6 +67,12 @@ void RR(vector<Process> &processes, int quantum) {
          << setw(width_waiting_time) << processo.tempo_espera
          << setw(width_status) << (processo.completed ? "COMPLETO" : "PENDENTE") << endl;
    }
+
+   int numerator_avg = 0;
+   for (const auto &processo : processes) {
+      numerator_avg = numerator_avg + processo.tempo_espera;
+   }
+   cout << "TEMPO DE ESPERA MEDIO: " << numerator_avg/100;
 }
 
 int main() {
